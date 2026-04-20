@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NexMath</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="top-controls">
+  <div class="lang-menu" aria-label="Selector de idioma">
+    <button id="langTrigger" class="lang-trigger" type="button">🇪🇸 ES ▾</button>
+    <div id="langOptions" class="lang-options">
+      <button type="button" data-lang="es">🇪🇸 ES</button>
+      <button type="button" data-lang="en">🇬🇧 EN</button>
+    </div>
+  </div>
+</div>
+
+<header id="inicio" class="screen active hero">
+  <div class="overlay">
+    <div class="hero-card">
+      <div class="hero-left">
+        <h1 class="logo">NexMath</h1>
+        <p class="hero-lead" data-i18n="hero_lead">Matemáticas claras, estructuradas y a tu ritmo.</p>
+
+        <div class="hero-ctas">
+          <button class="btn-primary" onclick="mostrar('registro')" data-i18n="register">Registrarse</button>
+          <button class="btn-ghost" onclick="mostrar('login')" data-i18n="login">Iniciar sesión</button>
+        </div>
+
+        <div class="features">
+          <div class="feature-card">
+            <strong data-i18n="feature_24">24/7</strong>
+            <span data-i18n="feature_tutor">Tutor virtual</span>
+          </div>
+          <div class="feature-card">
+            <strong data-i18n="feature_levels">Niveles</strong>
+            <span data-i18n="feature_primary_secondary">Primaria y Secundaria</span>
+          </div>
+          <div class="feature-card">
+            <strong data-i18n="feature_progress">Progreso</strong>
+            <span data-i18n="feature_level_up">Sube de nivel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card-cta">
+          <h4 data-i18n="start_today">Comienza hoy</h4>
+          <p data-i18n="start_text">Regístrate gratis y prueba una lección.</p>
+          <button class="btn-primary" onclick="mostrar('registro')" data-i18n="create_account">Crear cuenta</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="registro" class="screen auth-screen">
+  <button class="btn-back" onclick="mostrar('inicio')" data-i18n="back">Volver</button>
+
+  <div class="form-box card">
+    <h2 data-i18n="create_account">Crear cuenta</h2>
+
+    <input id="nombre" data-i18n-placeholder="full_name" placeholder="Nombre completo" />
+    <input id="edad" type="number" data-i18n-placeholder="age" placeholder="Edad" />
+
+    <select id="grado">
+      <option value="" data-i18n="grade_placeholder">Grado</option>
+      <option value="1ro Primaria" data-i18n="grade_1_primary">1ro Primaria</option>
+      <option value="2do Primaria" data-i18n="grade_2_primary">2do Primaria</option>
+      <option value="3ro Primaria" data-i18n="grade_3_primary">3ro Primaria</option>
+      <option value="4to Primaria" data-i18n="grade_4_primary">4to Primaria</option>
+      <option value="5to Primaria" data-i18n="grade_5_primary">5to Primaria</option>
+      <option value="6to Primaria" data-i18n="grade_6_primary">6to Primaria</option>
+      <option value="1ro Secundaria" data-i18n="grade_1_secondary">1ro Secundaria</option>
+      <option value="2do Secundaria" data-i18n="grade_2_secondary">2do Secundaria</option>
+      <option value="3ro Secundaria" data-i18n="grade_3_secondary">3ro Secundaria</option>
+      <option value="4to Secundaria" data-i18n="grade_4_secondary">4to Secundaria</option>
+      <option value="5to Secundaria" data-i18n="grade_5_secondary">5to Secundaria</option>
+    </select>
+
+    <select id="colegio">
+      <option value="" data-i18n="school_placeholder">Colegio</option>
+      <option value="Innova Schools" data-i18n="school_innova">Innova Schools</option>
+      <option value="Colegio Público" data-i18n="school_public">Colegio Público</option>
+      <option value="Colegio Particular" data-i18n="school_private">Colegio Particular</option>
+    </select>
+
+    <input id="ciudad" data-i18n-placeholder="city" placeholder="Ciudad" />
+    <input id="pais" data-i18n-placeholder="country" placeholder="País" />
+
+    <input id="email" data-i18n-placeholder="email_placeholder" placeholder="Correo electrónico" />
+    <input id="password" type="password" data-i18n-placeholder="password_placeholder" placeholder="Contraseña" />
+
+    <button class="btn-primary" onclick="registrar()" data-i18n="create_account">Crear cuenta</button>
+  </div>
+</section>
+
+<section id="login" class="screen auth-screen">
+  <button class="btn-back" onclick="mostrar('inicio')" data-i18n="back">Volver</button>
+
+  <div class="form-box card">
+    <h2 data-i18n="login">Iniciar sesión</h2>
+
+    <input id="loginEmail" data-i18n-placeholder="login_email_placeholder" placeholder="Correo" />
+    <input id="loginPass" type="password" data-i18n-placeholder="login_password_placeholder" placeholder="Contraseña" />
+
+    <button class="btn-primary" onclick="login()" data-i18n="enter">Entrar</button>
+  </div>
+</section>
+
+<main id="principal" class="screen main-screen">
+  <div class="container">
+
+    <section class="card full about-card">
+      <h2 data-i18n="what_is">¿Qué es NexMath?</h2>
+      <p data-i18n="about_text">
+        NexMath es un asistente virtual que te guía paso a paso en matemáticas,
+        adaptándose a tu grado y ritmo de aprendizaje.
+      </p>
+    </section>
+
+    <div class="main-layout">
+      <section class="card roadmap">
+        <h3 data-i18n="roadmap_title">Ruta de estudio</h3>
+        <ol class="roadmap-list">
+          <li data-i18n="roadmap_1">Regístrate y elige tu grado y colegio.</li>
+          <li data-i18n="roadmap_2">Explora los cursos recomendados según tu nivel.</li>
+          <li data-i18n="roadmap_3">Usa sugerencias y recursos para avanzar más rápido.</li>
+        </ol>
+      </section>
+
+      <div class="side-column">
+        <section class="card tips">
+          <h3 data-i18n="tips_title">Tips</h3>
+          <ul>
+            <li data-i18n="tip_1">Estudia 20 minutos diarios</li>
+            <li data-i18n="tip_2">Practica todos los días</li>
+            <li data-i18n="tip_3">Refuerza lo que fallas</li>
+          </ul>
+        </section>
+
+        <section class="card sugerencias">
+          <h3 data-i18n="suggestions_title">Sugerencias</h3>
+          <a class="btn-sugerencias" href="https://forms.gle/qJ1oDFrKpenvX1xA9" target="_blank" data-i18n="send_suggestion">Enviar sugerencia</a>
+        </section>
+      </div>
+    </div>
+
+    <div class="center">
+      <button class="btn-cursos" onclick="mostrar('cursos')" data-i18n="explore_courses">Explorar cursos</button>
+    </div>
+  </div>
+</main>
+
+<section id="cursos" class="screen courses-screen">
+  <button class="btn-back" onclick="mostrar('principal')" data-i18n="back">Volver</button>
+
+  <div class="container">
+    <h1 class="logo" data-i18n="courses_title">Cursos</h1>
+
+    <div class="courses-grid">
+      <article class="course card primaria singapur" data-stage="primary" data-min="1" data-max="6">
+        <div class="course-header">
+          <h3 data-i18n="primary_singapur_title">Matemática Primaria — Método Singapur</h3>
+          <span data-i18n="primary_singapur_span">Solo Innova Schools (Primaria)</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1HoAEm3Kj7d_UHgxmEi_BG4Q6S-zgQhc4?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Matematica_Primaria.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card primaria tradicional" data-stage="primary" data-min="1" data-max="6">
+        <div class="course-header">
+          <h3 data-i18n="primary_traditional_title">Matemática Primaria — Método Tradicional</h3>
+          <span data-i18n="primary_traditional_span">Para toda Primaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/15WcTIcDzYEsr_wMwkhk5pdvA7g_Z4FU6?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Matematica_Primaria.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card all-course" data-stage="all" data-min="1" data-max="6">
+        <div class="course-header">
+          <h3 data-i18n="reading_title">Lectura</h3>
+          <span data-i18n="reading_span">Para toda Primaria y Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1R6ojbVY9ZErGOM6_hcxn56B4RgjUBUun?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria" data-stage="secondary" data-min="1" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="arithmetic_title">Aritmética</h3>
+          <span data-i18n="arithmetic_span">Toda Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1LStHxbaLRjJNDZ--uHUHVNsnOi1T-5ey?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Aritmetica.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria" data-stage="secondary" data-min="1" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="geometry_title">Geometría</h3>
+          <span data-i18n="geometry_span">Toda Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1JxXqW6gx0zUDQRbH07xZXM0m6TIKB_98?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Geometria.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria" data-stage="secondary" data-min="1" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="algebra_title">Álgebra</h3>
+          <span data-i18n="algebra_span">Toda Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/10r2an9VsBtHHDTkgyCoT4_Ka0Y4NZwMx?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Algebra.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria" data-stage="secondary" data-min="1" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="reasoning_math_title">Razonamiento Matemático</h3>
+          <span data-i18n="reasoning_math_span">Toda Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1zoQ0vfPGPV9FNgeHc8GUXAAk7rMiHBAZ?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Raz_Matematico.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria" data-stage="secondary" data-min="1" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="reasoning_verbal_title">Razonamiento Verbal</h3>
+          <span data-i18n="reasoning_verbal_span">Toda Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/13nK9FlZH_olirx1W8DCuKdEFPh36E9nu?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Raz_Verbal.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria-alta" data-stage="secondary" data-min="3" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="trig_title">Trigonometría</h3>
+          <span data-i18n="trig_span">3ro, 4to y 5to de Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1JWAPIn8xvHC4t0YIkYBZyqE6DNRG5Fgt?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Trigonometria.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria-alta" data-stage="secondary" data-min="3" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="functions_title">Funciones y Límites</h3>
+          <span data-i18n="functions_span">3ro, 4to y 5to de Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1ii7w-tK0fNKpTQnbl3q2HIyNQWfF-k5T?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Funciones_y_Limites.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria-alta" data-stage="secondary" data-min="3" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="chemistry_title">Química</h3>
+          <span data-i18n="chemistry_span">3ro, 4to y 5to de Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1nwECuAnybnaoSwRkB6yWmrF4CPzBnx0I?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Quimica.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria-alta" data-stage="secondary" data-min="3" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="physics_title">Física</h3>
+          <span data-i18n="physics_span">3ro, 4to y 5to de Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1y0JKP3X7EC6kPo8yTeDyqyd07jM0GV_M?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Fisica.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria-alta" data-stage="secondary" data-min="3" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="biology_title">Biología</h3>
+          <span data-i18n="biology_span">3ro, 4to y 5to de Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1nZuIIOYMJdcXE-r8OAyFXeKo3M7D3O9d?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Biologia.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+
+      <article class="course card secundaria-alta" data-stage="secondary" data-min="4" data-max="5">
+        <div class="course-header">
+          <h3 data-i18n="calculus_title">Cálculo Diferencial e Integral</h3>
+          <span data-i18n="calculus_span">4to y 5to de Secundaria</span>
+        </div>
+        <div class="course-actions">
+          <a class="btn-primary" href="https://gemini.google.com/gem/1zWMhcW64jt7-6_XGhf4ofdDWiTVpe55R?usp=sharing" target="_blank" data-i18n="open">Entrar</a>
+          <a class="btn-secondary" href="/temario/Calculo_Diferencial_e_Integral.xlsx" data-i18n="syllabus">Temario</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="admin" class="screen admin-screen">
+  <button class="btn-back" onclick="salirAdmin()">Salir del panel</button>
+
+  <div class="container admin-container">
+    <div class="admin-header">
+      <div>
+        <h1 class="logo">Panel de Administración</h1>
+        <p class="admin-sub">Acceso privado para revisar, editar, exportar y auditar usuarios y descargas.</p>
+      </div>
+      <div class="admin-actions-top">
+        <button class="btn-secondary" type="button" onclick="exportAdmin('csv')">CSV usuarios</button>
+        <button class="btn-secondary" type="button" onclick="exportAdmin('xlsx')">Excel completo</button>
+        <button class="btn-secondary" type="button" onclick="exportAdmin('pdf')">PDF completo</button>
+        <button class="btn-secondary" type="button" onclick="exportAdmin('pdf-monthly')">PDF del mes</button>
+      </div>
+    </div>
+
+    <div class="admin-stats">
+      <article class="admin-stat card">
+        <span>Total usuarios</span>
+        <strong id="statTotal">0</strong>
+      </article>
+      <article class="admin-stat card">
+        <span>Primaria</span>
+        <strong id="statPrimary">0</strong>
+      </article>
+      <article class="admin-stat card">
+        <span>Secundaria</span>
+        <strong id="statSecondary">0</strong>
+      </article>
+      <article class="admin-stat card">
+        <span>Este mes</span>
+        <strong id="statMonth">0</strong>
+      </article>
+      <article class="admin-stat card">
+        <span>Descargas temarios</span>
+        <strong id="statDownloads">0</strong>
+      </article>
+    </div>
+
+    <div class="admin-grid">
+      <section class="card admin-chart-card">
+        <div class="admin-card-head">
+          <h3>Usuarios por mes</h3>
+          <button class="btn-primary" type="button" onclick="loadAdminData()">Actualizar</button>
+        </div>
+        <div class="chart-box">
+          <canvas id="usersChart"></canvas>
+        </div>
+      </section>
+
+      <section class="card admin-chart-card">
+        <div class="admin-card-head">
+          <h3>Temarios más descargados</h3>
+        </div>
+        <div class="chart-box">
+          <canvas id="downloadsChart"></canvas>
+        </div>
+      </section>
+    </div>
+
+    <div class="admin-grid">
+      <section class="card admin-tools-card">
+        <label class="admin-search-label" for="adminSearch">Buscar usuario</label>
+        <input id="adminSearch" class="admin-search" type="text" placeholder="Nombre, correo, grado o colegio" oninput="filterAdminTable()">
+        <p class="admin-note">Edita celdas, guarda por fila o elimina usuarios directamente.</p>
+      </section>
+
+      <section class="card admin-tools-card">
+        <div class="mini-list-head">
+          <h3>Descargas recientes</h3>
+          <span>Conteo por archivo</span>
+        </div>
+        <div class="downloads-quick" id="downloadsQuick"></div>
+      </section>
+    </div>
+
+    <section class="card admin-table-card">
+      <h3 class="section-title">Usuarios</h3>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Nombre</th>
+              <th>Edad</th>
+              <th>Grado</th>
+              <th>Colegio</th>
+              <th>Ciudad</th>
+              <th>País</th>
+              <th>Email</th>
+              <th>Contraseña</th>
+              <th>Fecha</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card admin-table-card">
+      <h3 class="section-title">Descargas de temarios</h3>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Temario</th>
+              <th>Descargas</th>
+              <th>Última descarga</th>
+            </tr>
+          </thead>
+          <tbody id="downloadsTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
