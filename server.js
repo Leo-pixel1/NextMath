@@ -14,11 +14,10 @@ app.use(express.static(path.join(__dirname, "public")));
 const ADMIN_KEY = process.env.ADMIN_KEY || "LeonardoG19";
 
 const pool = new Pool({
-  user: process.env.PGUSER || "postgres",
-  host: process.env.PGHOST || "localhost",
-  database: process.env.PGDATABASE || "postgres",
-  password: process.env.PGPASSWORD || "leonardo1908",
-  port: Number(process.env.PGPORT || 5433),
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 function monthKeyTZ(dateValue, timeZone = "America/Lima") {
